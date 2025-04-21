@@ -1,5 +1,5 @@
 # run and record
-run_finemap_SS_sparse <- function(xMat, q, leftTimes, rightTimes, nKnots=1, tposInd, obsInd, sigmaAprop, sigmaEprop, sigmaBprop,
+run_finemap_spikeslabsparse <- function(xMat, q, leftTimes, rightTimes, nKnots=1, tposInd, obsInd, sigmaAprop, sigmaEprop, sigmaBprop,
                                   sigmaAprior, sigmaEprior, sigmaBprior, B=10000, quant_r=NULL, addProb, removeProb,
                                   seed=0, burnIn=0.2, alphaPriorMean=NULL, etaPriorMean = NULL, checkpoint=FALSE) {
   
