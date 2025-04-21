@@ -1,4 +1,4 @@
-mcmc_step_pi_new <- function(leftDmat, rightDmat, tposInd, obsInd, piCurr, alphaCurr, etaCurr, betaCurr, 
+mcmc_step_sparse <- function(leftDmat, rightDmat, tposInd, obsInd, piCurr, alphaCurr, etaCurr, betaCurr, 
                              sigmaAprop, sigmaEprop, sigmaBprop, sigmaAprior, sigmaEprior, sigmaBprior,
                              gammaCurr, removeProb, addProb,alphaPriorMean, etaPriorMean) {
   
