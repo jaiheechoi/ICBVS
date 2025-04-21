@@ -1,3 +1,42 @@
+#' Add together two numbers
+#' 
+#' @param xMat A n x p matrix of covariate data.
+#' @param q Total number of SNPs.
+#' @param rightTimes A n x 1 vector of observed left times of the event of interest.
+#' @param leftTimes A n x 1 vector of observed right times of the event of interest.
+#' @param nKnots Number of internal knots in cubic spline for estimating baseline hazard function. 
+#' @param tposInd A n x 1 vector indicating whether the event was observed before last follow-up.
+#' @param obsInd A n x 1 vector indicating whether the event was observed after follow-up started.
+#' @param sigmaAprop Hyperparameter for the standard deviation of the proposal distribution for the spline coefficients.
+#' @param sigmaBprop Hyperparameter for the standard deviation of the proposal distribution for the genetic effect coefficients.
+#' @param sigmaEprop Hyperparameter for the standard deviation of the proposal distribution for the fixed effect coefficients.
+#' @param sigmaAprior Hyperparameter for the standard deviation of the prior distribution for the spline coefficients.
+#' @param sigmaBprior Hyperparameter for the standard deviation of the prior distribution for the genetic effect coefficients.
+#' @param sigmaEprior Hyperparameter for the standard deviation of the prior distribution for the fixed effect coefficients.
+#' @param B Number of MCMC iterations (excluding burn-in). (Default set to 10000 iterations)
+#' @param quant_r Quantiles of time to use in constructing the spline.
+#' @param addProb Probability of adding another causal variant in selection scheme. 
+#' @param removeProb Probability of removing another causal variant in selection scheme. 
+#' @param seed Random seed. (Default set to 0)
+#' @param burnIn Percentage of first beginning iterations removed from MCMC. (Default set to 0.2)
+#' @param alphaPriorMean A nKnot + 1 vector for original spline coefficient estimates. (Default set to NULL)
+#' @param A p x 1 vector for original fixed effect coefficient estimates. (Default set to NULL)
+#' @param checkpoint Boolean indicating whether to print results every 100 iterations. (Default set to FALSE)
+#' @return A list with the elements:
+#' \item{betaChain}{A (B*burnIn) x q matrix containing all genetic effect coefficient estimates from all MCMC iterations, excluding burn-in.}
+#' \item{alphaChain}A (B*burnIn) x (nKnot + 2) matrix containing all spline coefficient estimates from all MCMC iterations, excluding burn-in.}
+#' \item{etaChain}{A (B*burnIn) x p matrix containing all fixed effect coefficient estimates from all MCMC iterations, excluding burn-in.}
+#' \item{gammaChain}{A (B*burnIn) x q matrix containing all inclusion indicator from all MCMC iterations, excluding burn-in.}
+#' \item{piChain}{A (B*burnIn) x 1 vector containing all sparsity parameter estimates from all MCMC iterations, excluding burn-in.}
+#' \item{accMat}{A (B*burnIn) x (q*2 + (nKnot + 2) + p + 1) matrix containing indicators for whether the proposal was accepted (= 1) or not (=0).}
+#' @examples
+#' run_finemap_spikeslabsparse(xMat = cbind(xMat, gMat), q = 2, leftTimes = lt, rightTimes = rt, nKnots = nKnots,
+                                                               tposInd = tposInd, obsInd = obsInd,
+                                                               sigmaAprior = sigmaAprior, sigmaEprior = sigmaEprior,
+                                                               sigmaBprior = sigmaBprior, B=B,
+                                                               sigmaAprop = sigmaAprop, sigmaEprop = sigmaEprop, sigmaBprop = sigmaBprop,
+                                                               addProb = addProb, removeProb = removeProb, seed=0, burnIn=0.2,
+                                                               alphaPriorMean=rep(1, nKnots + 2), etaPriorMean=rep(0, ncol(xMat)), checkpoint=TRUE))
 # run and record
 run_finemap_spikeslabsparse <- function(xMat, q, leftTimes, rightTimes, nKnots=1, tposInd, obsInd, sigmaAprop, sigmaEprop, sigmaBprop,
                                   sigmaAprior, sigmaEprior, sigmaBprior, B=10000, quant_r=NULL, addProb, removeProb,
