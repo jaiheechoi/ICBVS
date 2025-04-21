@@ -27,7 +27,7 @@ run_finemap_ic_sparse <- function(xMat, q, leftTimes, rightTimes, nKnots=1, tpos
   # loop
   for (mc_it in 1:B) {
     # run MCMC one interation
-    mcmcOut <- mcmc_step_pi_new(leftDmat = dmats$left_dmat, rightDmat =  dmats$right_dmat, tposInd = tposInd, 
+    mcmcOut <- mcmc_step_sparse(leftDmat = dmats$left_dmat, rightDmat =  dmats$right_dmat, tposInd = tposInd, 
                                 obsInd = obsInd, alphaCurr = alphaCurr, etaCurr = etaCurr, betaCurr = betaCurr, 
                                 sigmaAprop = sigmaAprop, sigmaEprop = sigmaEprop, sigmaBprop = sigmaBprop,
                                 sigmaAprior = sigmaAprior, sigmaEprior = sigmaEprior, sigmaBprior = sigmaBprior,
