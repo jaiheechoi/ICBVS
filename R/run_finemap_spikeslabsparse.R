@@ -33,7 +33,7 @@
 #' run_finemap_spikeslabsparse(xMat = cbind(xMat, gMat), q = 2, leftTimes = lt, rightTimes = rt, nKnots = nKnots,
 #'  tposInd = tposInd, obsInd = obsInd,
 #' sigmaAprior = sigmaAprior, sigmaEprior = sigmaEprior,
-#' sigmaBprior = sigmaBprior, B=B,
+#' sigmaBprior = sigmaBprior, B=1000000,
 #' sigmaAprop = sigmaAprop, sigmaEprop = sigmaEprop, sigmaBprop = sigmaBprop,
 #' addProb = addProb, removeProb = removeProb, seed=0, burnIn=0.2,
 #' alphaPriorMean=rep(1, nKnots + 2), etaPriorMean=rep(0, ncol(xMat)), checkpoint=TRUE)
